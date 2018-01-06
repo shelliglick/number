@@ -1,0 +1,9 @@
+spring:
+  application:
+    name:
+      trading-producer
+  profiles:
+    active: prod
+  cloud:
+    config:
+      uri: http://localhost:8899
