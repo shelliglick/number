@@ -2,6 +2,7 @@ package com.demo.springboot;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,10 +13,15 @@ public class GameManagerImpl implements GameManager {
 	
 	private int counter;
 
+	@Value("${game.top}")
+	private int top;
+
+	@Value("${game.limit}")
+	private int limit;
 
 	@PostConstruct
 	public void init() {
-		init((int)(Math.random() * 10) + 1);
+		init((int)(Math.random() * top) + 1);
 	}
 	
 	protected void init(int num) {
@@ -34,7 +40,7 @@ public class GameManagerImpl implements GameManager {
 			init();
 			return retVal;
 		}
-		if (counter == 5) {
+		if (counter == limit) {
 			init();
 			return "Game Over";
 		}
